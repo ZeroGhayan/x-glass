@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>X Glassmorphism Settings</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 560px; margin: 40px auto; padding: 20px; background: #1a1a1a; color: #eee; }
+    h1 { font-size: 22px; margin-bottom: 8px; }
+    label { display: block; margin: 14px 0 6px; font-size: 14px; }
+    input[type="text"], input[type="color"] { width: 100%; box-sizing: border-box; }
+    input[type="range"] { width: 100%; }
+    .row { display: flex; align-items: center; gap: 8px; }
+    button { margin-top: 8px; padding: 8px 16px; background: #333; color: white; border: none; border-radius: 6px; cursor: pointer; }
+    button:hover { background: #444; }
+    #status { margin-top: 16px; color: #8f8; }
+    .section { margin-top: 24px; padding-top: 12px; border-top: 1px solid #333; }
+    #preview { max-width: 120px; max-height: 80px; border-radius: 6px; margin-left: 12px; object-fit: cover; border: 1px solid #444; }
+    .bg-row { display: flex; align-items: flex-start; gap: 12px; }
+  </style>
+</head>
+<body>
+  <h1>X Glassmorphism Settings</h1>
+
+  <div class="row" style="margin:12px 0;">
+    <label style="margin:0;flex:1;">Enabled</label>
+    <input type="checkbox" id="enabled" checked>
+  </div>
+
+  <div class="section">
+    <label>Background image</label>
+    <div class="bg-row">
+      <div style="flex:1;">
+        <input type="file" id="file" accept="image/*">
+        <br>
+        <input type="text" id="bgImage" placeholder="Or paste a URL" style="margin-top:8px;">
+        <br>
+        <button id="clear">Clear background</button>
+      </div>
+      <img id="preview" alt="Preview" style="display:none;">
+    </div>
+  </div>
+
+  <div class="section">
+    <label>Text color</label>
+    <div class="row">
+      <input type="color" id="textColor" value="#ffffff">
+      <input type="range" id="textOpacity" min="0.3" max="1" step="0.05" value="1">
+    </div>
+
+    <label>Overlay color</label>
+    <input type="color" id="overlayColor" value="#000000">
+  </div>
+
+  <div class="section">
+    <label style="font-weight:600;">Main group: <span id="mainGroupVal">0.00</span></label>
+    <input type="range" id="mainGroupOpacity" min="0" max="1" step="0.01" value="0">
+    <small>Controls Timeline + Composer</small>
+
+    <label>Timeline: <span id="timelineVal">0.00</span></label>
+    <input type="range" id="timelineOpacity" min="0" max="1" step="0.01" value="0">
+
+    <label>Composer area: <span id="composerAreaVal">0.00</span></label>
+    <input type="range" id="composerAreaOpacity" min="0" max="1" step="0.01" value="0">
+
+    <label>Toolbar container: <span id="toolbarContainerVal">0.00</span></label>
+    <input type="range" id="toolbarContainerOpacity" min="0" max="1" step="0.01" value="0">
+
+    <label>Toolbar icons: <span id="toolbarMainVal">0.00</span></label>
+    <input type="range" id="toolbarMainOpacity" min="0" max="1" step="0.01" value="0">
+
+    <label>Toolbar reply: <span id="toolbarReplyVal">0.00</span></label>
+    <input type="range" id="toolbarReplyOpacity" min="0" max="1" step="0.01" value="0">
+
+    <label>Toolbar post: <span id="toolbarPostVal">0.00</span></label>
+    <input type="range" id="toolbarPostOpacity" min="0" max="1" step="0.01" value="0">
+  </div>
+
+  <label>Nav: <span id="navVal">0.00</span></label>
+  <input type="range" id="navOpacity" min="0" max="1" step="0.01" value="0">
+
+  <div class="section">
+    <label style="font-weight:600;">Search group: <span id="searchGroupVal">0.00</span></label>
+    <input type="range" id="searchGroupOpacity" min="0" max="1" step="0.01" value="0">
+    <small>Controls all search elements below</small>
+
+    <label>Search outer: <span id="searchOuterVal">0.00</span></label>
+    <input type="range" id="searchOuterOpacity" min="0" max="1" step="0.01" value="0">
+
+    <label>Search form: <span id="searchFormVal">0.00</span></label>
+    <input type="range" id="searchFormOpacity" min="0" max="1" step="0.01" value="0">
+
+    <label>Search inner: <span id="searchInnerVal">0.00</span></label>
+    <input type="range" id="searchInnerOpacity" min="0" max="1" step="0.01" value="0">
+
+    <label>Search kemksi: <span id="searchKemksiVal">0.00</span></label>
+    <input type="range" id="searchKemksiOpacity" min="0" max="1" step="0.01" value="0">
+  </div>
+
+  <div class="section">
+    <label>Premium: <span id="premiumVal">0.00</span></label>
+    <input type="range" id="premiumOpacity" min="0" max="1" step="0.01" value="0">
+
+    <label>Trends: <span id="trendsVal">0.00</span></label>
+    <input type="range" id="trendsOpacity" min="0" max="1" step="0.01" value="0">
+
+    <label>Who to follow: <span id="whoVal">0.00</span></label>
+    <input type="range" id="whoToFollowOpacity" min="0" max="1" step="0.01" value="0">
+  </div>
+
+  <button id="save" style="width:100%;margin-top:20px;">Save & Apply</button>
+  <div id="status"></div>
+
+  <script src="options.js"></script>
+</body>
+</html>
