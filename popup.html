@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { width: 340px; font-family: system-ui, sans-serif; padding: 12px; margin: 0; background: #1a1a1a; color: #eee; max-height: 600px; overflow-y: auto; }
+    h2 { margin: 0 0 12px; font-size: 16px; }
+    label { display: block; margin: 8px 0 4px; font-size: 13px; }
+    input[type="text"], input[type="color"] { width: 100%; box-sizing: border-box; }
+    input[type="range"] { width: 100%; }
+    .row { display: flex; align-items: center; gap: 8px; }
+    button { margin-top: 12px; width: 100%; padding: 8px; background: #333; color: white; border: none; border-radius: 6px; cursor: pointer; }
+    button:hover { background: #444; }
+    small { color: #aaa; font-size: 11px; }
+    .section { margin-top: 16px; padding-top: 8px; border-top: 1px solid #333; }
+  </style>
+</head>
+<body>
+  <h2>X Glassmorphism</h2>
+
+  <div class="row" style="margin-bottom:12px;">
+    <label style="margin:0;flex:1;">Enabled</label>
+    <input type="checkbox" id="enabled" checked>
+  </div>
+
+  <label>Background image</label>
+  <button id="openOptions">Choose local image...</button>
+  <input type="text" id="bgImage" placeholder="https://..." style="margin-top:6px;">
+  <button id="clearBg" style="margin-top:4px;background:#442222;">Clear background</button>
+
+  <label>Text color</label>
+    <div class="row">
+      <input type="color" id="textColor" value="#ffffff">
+      <input type="range" id="textOpacity" min="0.3" max="1" step="0.05" value="1">
+    </div>
+    <label>Overlay color</label>
+    <input type="color" id="overlayColor" value="#000000">
+
+  <div class="section">
+    <small>Individual elements (start at 0)</small>
+
+    <div class="section">
+      <label style="font-weight:600;">Main group: <span id="mainGroupVal">0.00</span></label>
+      <input type="range" id="mainGroupOpacity" min="0" max="1" step="0.01" value="0">
+      <small>Controls Timeline + Composer</small>
+
+      <label>Timeline: <span id="timelineVal">0.00</span></label>
+      <input type="range" id="timelineOpacity" min="0" max="1" step="0.01" value="0">
+
+      <label>Composer area: <span id="composerAreaVal">0.00</span></label>
+      <input type="range" id="composerAreaOpacity" min="0" max="1" step="0.01" value="0">
+
+      <label>Toolbar container: <span id="toolbarContainerVal">0.00</span></label>
+      <input type="range" id="toolbarContainerOpacity" min="0" max="1" step="0.01" value="0">
+
+      <label>Toolbar icons: <span id="toolbarMainVal">0.00</span></label>
+      <input type="range" id="toolbarMainOpacity" min="0" max="1" step="0.01" value="0">
+
+      <label>Toolbar reply: <span id="toolbarReplyVal">0.00</span></label>
+      <input type="range" id="toolbarReplyOpacity" min="0" max="1" step="0.01" value="0">
+
+      <label>Toolbar post: <span id="toolbarPostVal">0.00</span></label>
+      <input type="range" id="toolbarPostOpacity" min="0" max="1" step="0.01" value="0">
+    </div>
+
+    <label>Nav: <span id="navVal">0.00</span></label>
+    <input type="range" id="navOpacity" min="0" max="1" step="0.01" value="0">
+
+    <label>Premium: <span id="premiumVal">0.00</span></label>
+    <input type="range" id="premiumOpacity" min="0" max="1" step="0.01" value="0">
+
+    <label>Trends: <span id="trendsVal">0.00</span></label>
+    <input type="range" id="trendsOpacity" min="0" max="1" step="0.01" value="0">
+
+    <label>Who to follow: <span id="whoVal">0.00</span></label>
+    <input type="range" id="whoToFollowOpacity" min="0" max="1" step="0.01" value="0">
+  </div>
+
+  <button id="save">Save & Apply</button>
+  <small>Test each slider separately on X.</small>
+
+  <script src="popup.js"></script>
+</body>
+</html>
