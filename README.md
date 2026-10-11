@@ -8,6 +8,8 @@ Extensão simples para o X (Twitter) que aplica:
 
 Tudo roda localmente no seu navegador. Nenhum dado é enviado para fora.
 
+> **Nota:** A extensão foi testada e funciona melhor com o **tema escuro** do X. No tema claro podem ocorrer inconsistências de interface.
+
 ## Instalação
 
 ### Opção recomendada: Carregar descompactado
