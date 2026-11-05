@@ -45,7 +45,12 @@ function applySettings(settings) {
   if (!style) {
     style = document.createElement("style");
     style.id = styleId;
-    document.documentElement.appendChild(style);
+    // Insert into <head>, never as a raw child of <html>. At document_start
+    // <head> does not exist yet, so the old code put a foreign node directly
+    // under <html> before X's own markup/bootstrap ran. That is the only
+    // difference from enabling the extension after load (which works), and it
+    // left X in a state where saving/bookmarking failed. See whenHeadReady().
+    (document.head || document.documentElement).appendChild(style);
   }
 
   if (s.enabled === false) {
@@ -202,7 +207,16 @@ function loadAndApply() {
   });
 }
 
-loadAndApply();
+// Wait until X's <head> exists so our <style> never lands outside it.
+function whenHeadReady(cb) {
+  if (document.head) return cb();
+  const obs = new MutationObserver(() => {
+    if (document.head) { obs.disconnect(); cb(); }
+  });
+  obs.observe(document.documentElement, { childList: true });
+}
+
+whenHeadReady(loadAndApply);
 
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area === "sync" || area === "local") {
