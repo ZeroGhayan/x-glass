@@ -1,10 +1,15 @@
 {
   "manifest_version": 3,
   "name": "X Glassmorphism",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Custom background image + transparent cards, blur and text color for X (Twitter). Works locally, no data collection.",
-  "permissions": ["storage"],
-  "host_permissions": ["https://x.com/*", "https://twitter.com/*"],
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://x.com/*",
+    "https://twitter.com/*"
+  ],
   "options_page": "options.html",
   "background": {
     "service_worker": "background.js"
@@ -15,10 +20,17 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://x.com/*", "https://twitter.com/*"],
-      "js": ["content.js"],
-      "css": ["styles.css"],
-      "run_at": "document_start"
+      "matches": [
+        "https://x.com/*",
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
+      "run_at": "document_idle"
     }
   ],
   "icons": {
