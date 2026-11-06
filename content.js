@@ -45,11 +45,7 @@ function applySettings(settings) {
   if (!style) {
     style = document.createElement("style");
     style.id = styleId;
-    // Insert into <head>, never as a raw child of <html>. At document_start
-    // <head> does not exist yet, so the old code put a foreign node directly
-    // under <html> before X's own markup/bootstrap ran. That is the only
-    // difference from enabling the extension after load (which works), and it
-    // left X in a state where saving/bookmarking failed. See whenHeadReady().
+    // Injected late (see whenXReady) so X boots exactly as without the extension.
     (document.head || document.documentElement).appendChild(style);
   }
 
@@ -207,16 +203,29 @@ function loadAndApply() {
   });
 }
 
-// Wait until X's <head> exists so our <style> never lands outside it.
-function whenHeadReady(cb) {
-  if (document.head) return cb();
-  const obs = new MutationObserver(() => {
-    if (document.head) { obs.disconnect(); cb(); }
-  });
-  obs.observe(document.documentElement, { childList: true });
+// Apply only after X has finished booting. Enabling the extension after the
+// page loads is the only path where saving posts works, so we reproduce that
+// exact path: wait for the timeline column to exist, then for the browser to
+// be idle, and only then inject our <style>. Cost: X's own background shows
+// for a moment before the custom one.
+function whenXReady(cb) {
+  let done = false;
+  const fire = () => {
+    if (done) return;
+    done = true;
+    obs.disconnect();
+    clearTimeout(fallback);
+    const idle = window.requestIdleCallback || ((f) => setTimeout(f, 300));
+    idle(() => cb(), { timeout: 2000 });
+  };
+  const ready = () => document.querySelector('[data-testid="primaryColumn"]');
+  const obs = new MutationObserver(() => { if (ready()) fire(); });
+  const fallback = setTimeout(fire, 8000);
+  if (ready()) return fire();
+  obs.observe(document.documentElement, { childList: true, subtree: true });
 }
 
-whenHeadReady(loadAndApply);
+whenXReady(loadAndApply);
 
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area === "sync" || area === "local") {
